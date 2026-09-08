@@ -1,0 +1,47 @@
+<a
+  class="card"
+  [href]="market.slug ? 'https://polymarket.com/event/' + market.slug : null"
+  target="_blank"
+  rel="noopener"
+>
+  <div class="card-top">
+    <img
+      *ngIf="market.image || market.icon"
+      class="thumb"
+      [src]="market.image || market.icon"
+      [alt]="market.question"
+    />
+    <div *ngIf="!market.image && !market.icon" class="thumb thumb-fallback">
+      {{ market.question.charAt(0) }}
+    </div>
+
+    <h3 class="question">{{ market.question }}</h3>
+  </div>
+
+  <div class="odds" *ngIf="isBinary; else leaderBlock">
+    <div class="odds-bar">
+      <span class="odds-bar-fill yes" [style.width.%]="yesPct"></span>
+    </div>
+    <div class="odds-labels">
+      <span class="odds-label yes-text">{{ yesLabel }} {{ yesPct }}%</span>
+      <span class="odds-label no-text">{{ noLabel }} {{ noPct }}%</span>
+    </div>
+  </div>
+
+  <ng-template #leaderBlock>
+    <div class="odds" *ngIf="leadingOutcome as leader">
+      <div class="odds-bar">
+        <span class="odds-bar-fill yes" [style.width.%]="leader.pct"></span>
+      </div>
+      <div class="odds-labels">
+        <span class="odds-label yes-text">{{ leader.name }} leads at {{ leader.pct }}%</span>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="card-footer">
+    <span class="chip" *ngIf="market.category">{{ market.category }}</span>
+    <span class="stat">{{ formattedVolume }} 24h vol</span>
+    <span class="stat" *ngIf="formattedEndDate">closes {{ formattedEndDate }}</span>
+  </div>
+</a>

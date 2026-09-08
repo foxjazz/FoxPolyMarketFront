@@ -1,0 +1,22 @@
+<div class="page">
+  <header class="page-header">
+    <h1>Trending</h1>
+    <input
+      class="search"
+      type="text"
+      placeholder="Search markets"
+      [ngModel]="searchTerm"
+      (ngModelChange)="onSearchChange($event)"
+    />
+  </header>
+
+  <p class="status" *ngIf="loading()">Loading markets…</p>
+  <p class="status status-error" *ngIf="error()">{{ error() }}</p>
+  <p class="status" *ngIf="!loading() && !error() && markets().length === 0">
+    No markets found.
+  </p>
+
+  <div class="grid" *ngIf="!loading() && !error() && markets().length > 0">
+    <app-market-card *ngFor="let market of markets()" [market]="market"></app-market-card>
+  </div>
+</div>

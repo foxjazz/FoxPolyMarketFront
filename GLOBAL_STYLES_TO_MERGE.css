@@ -1,4 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+/* ---------------------------------------------------------------
+   Merge this into your project's src/styles.css.
+   These are the shared color tokens the market-card and
+   market-list components reference via var(--token-name).
+   --------------------------------------------------------------- */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
