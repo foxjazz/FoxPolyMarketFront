@@ -7,10 +7,12 @@ import {
   PriceHistoryInterval,
   TrendingOrder,
 } from '../models/market.model';
+import { environment } from '../../environments/environment';
 
+const API_BASE_URL = environment.apiUrl;
 // Point this at wherever your FoxPolyMarket.Api project runs.
 // Check FoxPolyMarketApi/Properties/launchSettings.json for the exact port.
-const API_BASE_URL = 'http://localhost:5123/api';
+//const API_BASE_URL = '/api';
 
 @Injectable({ providedIn: 'root' })
 export class MarketService {
