@@ -1,0 +1,51 @@
+<div class="page">
+  <a class="back" routerLink="/">← Back to trending</a>
+
+  <p class="status" *ngIf="loading()">Loading market…</p>
+  <p class="status status-error" *ngIf="error()">{{ error() }}</p>
+
+  <div class="detail" *ngIf="!loading() && !error() && market() as m">
+    <div class="detail-header">
+      <img
+        *ngIf="m.image || m.icon"
+        class="detail-image"
+        [src]="m.image || m.icon"
+        [alt]="m.question"
+      />
+      <div>
+        <h1>{{ m.question }}</h1>
+        <span class="chip" *ngIf="m.category">{{ m.category }}</span>
+      </div>
+    </div>
+
+    <p class="description" *ngIf="m.description">{{ m.description }}</p>
+
+    <div class="outcomes" *ngIf="m.outcomeNames?.length">
+      <div class="outcome-row" *ngFor="let name of m.outcomeNames; let i = index">
+        <span class="outcome-name">{{ name }}</span>
+        <span class="outcome-price">
+          {{ (m.outcomePriceValues[i] ?? 0) * 100 | number: '1.0-1' }}%
+        </span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-label">24h Volume</span>
+        <span class="stat-value">{{ m.volume24hr ?? 0 | currency }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Total Volume</span>
+        <span class="stat-value">{{ m.volume ?? 0 | currency }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Liquidity</span>
+        <span class="stat-value">{{ m.liquidity ?? 0 | currency }}</span>
+      </div>
+      <div class="stat-item" *ngIf="m.endDate">
+        <span class="stat-label">Closes</span>
+        <span class="stat-value">{{ m.endDate | date: 'mediumDate' }}</span>
+      </div>
+    </div>
+  </div>
+</div>

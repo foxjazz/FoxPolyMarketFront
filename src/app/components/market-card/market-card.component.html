@@ -1,9 +1,4 @@
-<a
-  class="card"
-  [href]="market.slug ? 'https://polymarket.com/event/' + market.slug : null"
-  target="_blank"
-  rel="noopener"
->
+<a class="card" [routerLink]="['/market', market.id]">
   <div class="card-top">
     <img
       *ngIf="market.image || market.icon"

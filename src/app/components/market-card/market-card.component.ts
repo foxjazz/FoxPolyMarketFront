@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Market } from '../../models/market.model';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-market-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './market-card.component.html',
   styleUrl: './market-card.component.css',
 })
